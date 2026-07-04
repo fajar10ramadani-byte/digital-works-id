@@ -137,9 +137,9 @@
             </a>
             <nav class="hidden md:flex gap-8 text-sm font-semibold text-cream-muted dark:text-zinc-400">
                 <a href="index.html" class="text-cream-dark dark:text-cream-bg transition-colors">Home</a>
-                <a href="about.html" class="hover:text-cream-dark dark:hover:text-cream-bg transition-colors">Tentang Saya</a>
-                <a href="projects.html" class="hover:text-cream-dark dark:hover:text-cream-bg transition-colors">Project</a>
-                <a href="contact.html" class="hover:text-cream-dark dark:hover:text-cream-bg transition-colors">Kontak</a>
+                <a href="about.html" class="hover:text-cream-dark dark:hover:text-cream-bg transition-colors">About</a>
+                <a href="projects.html" class="hover:text-cream-dark dark:hover:text-cream-bg transition-colors">Projects</a>
+                <a href="contact.html" class="hover:text-cream-dark dark:hover:text-cream-bg transition-colors">Contact</a>
             </nav>
             <div class="flex items-center gap-4">
                 <!-- Theme Toggle Button -->
@@ -148,10 +148,6 @@
                     <i id="theme-toggle-dark-icon" class="hidden ph-fill ph-moon"></i>
                     <i id="theme-toggle-light-icon" class="hidden ph-fill ph-sun"></i>
                 </button>
-                <a href="contact.html"
-                    class="hidden sm:block px-6 py-2.5 rounded-full bg-cream-dark dark:bg-cream-bg text-white dark:text-cream-dark font-semibold text-sm hover:bg-black dark:hover:bg-white transition-colors shadow-lg shadow-cream-dark/10 dark:shadow-none">
-                    Let's Talk
-                </a>
                 <!-- Hamburger Button (Mobile Only) -->
                 <button id="mobile-menu-btn"
                     class="md:hidden text-cream-dark dark:text-cream-bg p-2 focus:outline-none">
@@ -166,12 +162,9 @@
         class="fixed top-24 left-0 w-full bg-cream-bg/95 dark:bg-zinc-950/95 backdrop-blur-md border-b border-cream-border dark:border-white/10 z-40 opacity-0 invisible transition-all duration-300 transform -translate-y-4">
         <nav class="flex flex-col p-6 gap-6 text-center font-bold text-cream-dark dark:text-cream-bg">
             <a href="index.html" class="mobile-link text-lg text-cream-accent">Home</a>
-            <a href="about.html" class="mobile-link text-lg hover:text-cream-accent">Tentang Saya</a>
-            <a href="projects.html" class="mobile-link text-lg hover:text-cream-accent">Project</a>
-            <a href="contact.html" class="mobile-link text-lg hover:text-cream-accent">Kontak</a>
-            <a href="contact.html"
-                class="mobile-link mt-4 px-8 py-3 mx-auto rounded-full bg-cream-dark dark:bg-cream-bg text-white dark:text-cream-dark font-semibold text-sm w-max shadow-lg">Let's
-                Talk</a>
+            <a href="about.html" class="mobile-link text-lg hover:text-cream-accent">About</a>
+            <a href="projects.html" class="mobile-link text-lg hover:text-cream-accent">Projects</a>
+            <a href="contact.html" class="mobile-link text-lg hover:text-cream-accent">Contact</a>
         </nav>
     </div>
 
@@ -198,7 +191,7 @@
             <!-- Premium Typography Headline -->
             <h1 data-aos="fade-up" data-aos-duration="1000"
                 class="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter mb-6 max-w-4xl mx-auto text-cream-dark dark:text-cream-bg leading-[1.1]">
-                Halo, Saya seorang <br />
+                Hi, I am a <br />
                 <span class="font-serif italic font-normal text-cream-accent">Digital Innovator.</span>
             </h1>
 
@@ -213,11 +206,11 @@
                 class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
                 <a href="projects.html"
                     class="w-full sm:w-auto px-8 py-4 bg-cream-dark dark:bg-cream-bg hover:bg-black dark:hover:bg-white text-white dark:text-cream-dark rounded-xl font-bold flex items-center justify-center gap-2 transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(45,45,45,0.2)] dark:shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-                    Lihat Project <i class="ph-bold ph-arrow-right"></i>
+                    View Projects <i class="ph-bold ph-arrow-right"></i>
                 </a>
                 <a href="about.html"
                     class="w-full sm:w-auto px-8 py-4 bg-white dark:bg-zinc-900 border border-cream-border dark:border-white/10 hover:bg-cream-light dark:hover:bg-zinc-800 text-cream-dark dark:text-cream-bg rounded-xl font-bold flex items-center justify-center gap-2 transition-all hover:scale-105 active:scale-95 shadow-sm">
-                    Kenali Lebih Jauh
+                    Discover More
                 </a>
             </div>
 
@@ -229,7 +222,7 @@
     <script>
         AOS.init({ duration: 800, once: false, offset: 50, easing: 'ease-out-cubic' });
 
-        const textToType = "Membangun ekosistem digital melalui integrasi AI dan teknologi web.";
+        const textToType = "Building digital ecosystems through AI integration and modern web technologies.";
         let index = 0; const speed = 40;
         function typeWriter() {
             if (index < textToType.length) {
