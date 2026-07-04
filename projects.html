@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Projects | Fajar Ramadhani</title>
+    <meta name="description" content="Portfolio dan hasil karya project Fajar Ramadhani.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        cream: { bg: '#FAF8F5', card: '#FFFFFF', border: '#E8E1D5', accent: '#A58763', dark: '#2D2D2D', muted: '#736B5E', light: '#D6C8AD' }
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        /* Background Beams Effect */
+        @keyframes fall {
+            0% { transform: translateY(-150px); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        .beam {
+            position: absolute; top: -150px; width: 1px; height: 250px;
+            background: linear-gradient(to bottom, transparent, rgba(165, 135, 99, 0.8), transparent);
+            animation: fall linear infinite;
+            filter: drop-shadow(0 0 8px rgba(165, 135, 99, 0.6));
+        }
+        .beam:nth-child(1) { left: 15%; animation-duration: 6s; animation-delay: 0s; }
+        .beam:nth-child(2) { left: 35%; animation-duration: 8s; animation-delay: 2.5s; }
+        .beam:nth-child(3) { left: 50%; animation-duration: 7s; animation-delay: 1s; }
+        .beam:nth-child(4) { left: 75%; animation-duration: 9s; animation-delay: 4s; }
+        .beam:nth-child(5) { left: 85%; animation-duration: 6.5s; animation-delay: 1.5s; }
+
+        /* Page Loader */
+        .page-loader {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: #FAF8F5; z-index: 99999;
+            transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .dark .page-loader { background-color: #09090b; }
+        .page-loader.hidden-loader { opacity: 0; visibility: hidden; }
+        .loader-circle {
+            width: 40px; height: 40px; border: 4px solid #A58763;
+            border-top-color: transparent; border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+
+<body
+    class="bg-cream-bg dark:bg-zinc-950 text-cream-dark dark:text-cream-bg font-sans antialiased selection:bg-cream-accent selection:text-white relative min-h-screen transition-colors duration-300">
+
+    <!-- Page Loader -->
+    <div id="page-loader" class="page-loader">
+        <div class="loader-circle"></div>
+    </div>
+
+    <!-- BACKGROUND BEAMS GLOBAL -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0 opacity-40 dark:opacity-70">
+        <div class="beam"></div>
+        <div class="beam"></div>
+        <div class="beam"></div>
+        <div class="beam"></div>
+        <div class="beam"></div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 w-full bg-cream-bg/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-cream-border dark:border-white/10 z-50 transition-all">
+        <div class="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="text-cream-dark dark:text-cream-bg font-extrabold text-xl tracking-tighter flex items-center gap-2">
+                <i class="ph-fill ph-code-block text-cream-accent"></i>
+                Portfolio<span class="text-cream-accent">.</span>
+            </a>
+            <nav class="hidden md:flex gap-8 text-sm font-semibold text-cream-muted dark:text-zinc-400">
+                <a href="index.html" class="hover:text-cream-dark dark:hover:text-cream-bg transition-colors">Home</a>
+                <a href="about.html" class="hover:text-cream-dark dark:hover:text-cream-bg transition-colors">Tentang Saya</a>
+                <a href="projects.html" class="text-cream-dark dark:text-cream-bg transition-colors">Project</a>
+                <a href="contact.html" class="hover:text-cream-dark dark:hover:text-cream-bg transition-colors">Kontak</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" type="button" class="text-cream-muted dark:text-zinc-400 hover:text-cream-accent dark:hover:text-cream-accent text-2xl p-1 transition-colors">
+                    <i id="theme-toggle-dark-icon" class="hidden ph-fill ph-moon"></i>
+                    <i id="theme-toggle-light-icon" class="hidden ph-fill ph-sun"></i>
+                </button>
+                <a href="contact.html" class="hidden sm:block px-6 py-2.5 rounded-full bg-cream-dark dark:bg-cream-bg text-white dark:text-cream-dark font-semibold text-sm hover:bg-black dark:hover:bg-white transition-colors shadow-lg shadow-cream-dark/10 dark:shadow-none">
+                    Let's Talk
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden text-cream-dark dark:text-cream-bg p-2 focus:outline-none">
+                    <i id="mobile-menu-icon" class="ph-bold ph-list text-3xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu"
+        class="fixed top-20 left-0 w-full bg-cream-bg/95 dark:bg-zinc-950/95 backdrop-blur-md border-b border-cream-border dark:border-white/10 z-40 opacity-0 invisible transition-all duration-300 transform -translate-y-4">
+        <nav class="flex flex-col p-6 gap-6 text-center font-bold text-cream-dark dark:text-cream-bg">
+            <a href="index.html" class="mobile-link text-lg hover:text-cream-accent">Home</a>
+            <a href="about.html" class="mobile-link text-lg hover:text-cream-accent">Tentang Saya</a>
+            <a href="projects.html" class="mobile-link text-lg text-cream-accent">Project</a>
+            <a href="contact.html" class="mobile-link text-lg hover:text-cream-accent">Kontak</a>
+            <a href="contact.html" class="mobile-link mt-4 px-8 py-3 mx-auto rounded-full bg-cream-dark dark:bg-cream-bg text-white dark:text-cream-dark font-semibold text-sm w-max shadow-lg">Let's Talk</a>
+        </nav>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="relative z-10 max-w-5xl mx-auto px-6 pt-32 pb-24 min-h-[80vh]">
+        <h1 data-aos="fade-up" class="text-4xl md:text-6xl font-black text-center mb-16 text-cream-dark dark:text-cream-bg">
+            <span class="font-serif italic font-normal text-cream-accent">Featured</span> Projects
+        </h1>
+
+        <section class="py-10">
+            <div data-aos="fade-up" data-aos-duration="800" class="mb-12 text-center">
+                <p class="text-cream-muted dark:text-zinc-400 font-medium text-lg">Beberapa karya dan kontribusi terbaik saya dalam dunia digital.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Project 1 -->
+                <a href="https://sssvideodownloader.my.id" target="_blank" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="100"
+                    class="group flex flex-col p-6 rounded-[2rem] bg-white dark:bg-zinc-900 border border-cream-border dark:border-white/10 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-cream-accent/30 dark:hover:border-cream-accent/50 transition-all duration-300">
+                    <div class="w-full aspect-video rounded-xl bg-cream-bg dark:bg-zinc-800 border border-cream-border dark:border-white/10 flex items-center justify-center mb-6 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('./images/downloadhub.jpg');"></div>
+                        <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-500"></div>
+                        <i class="ph-fill ph-browser text-6xl text-white group-hover:text-cream-accent group-hover:scale-110 transition-all duration-500 relative z-10"></i>
+                    </div>
+                    <span class="text-xs font-bold text-cream-accent tracking-widest uppercase mb-2">Web App</span>
+                    <h3 class="text-xl font-extrabold text-cream-dark dark:text-cream-bg mb-2">SSS Video Downloader</h3>
+                    <p class="text-cream-muted dark:text-zinc-400 text-sm mb-6 flex-grow font-medium">Platform pengunduh video instan dengan performa tinggi.</p>
+                    <div class="flex items-center gap-2 text-sm font-bold text-cream-dark dark:text-cream-bg group-hover:text-cream-accent dark:group-hover:text-cream-accent transition-colors">
+                        Visit Site <i class="ph-bold ph-arrow-right"></i>
+                    </div>
+                </a>
+
+                <!-- Project 2 (Kultur AI) -->
+                <a href="https://www.instagram.com/kultur.ai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" data-aos="flip-up" data-aos-duration="1000" data-aos-delay="300"
+                    class="group flex flex-col p-6 rounded-[2rem] bg-white dark:bg-zinc-900 border border-cream-border dark:border-white/10 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-cream-accent/30 dark:hover:border-cream-accent/50 transition-all duration-300">
+                    <div class="w-full aspect-video rounded-xl bg-[#8c1c13] border border-cream-border dark:border-white/10 flex items-center justify-center mb-6 overflow-hidden relative">
+                        <img src="./images/kultur.png" class="absolute w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Kultur AI Background">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500"></div>
+                        <i class="ph-fill ph-instagram-logo text-6xl text-white group-hover:text-cream-accent group-hover:scale-110 transition-all duration-500 relative z-10 drop-shadow-lg"></i>
+                    </div>
+                    <span class="text-xs font-bold text-cream-accent tracking-widest uppercase mb-2">Content Strategy</span>
+                    <h3 class="text-xl font-extrabold text-cream-dark dark:text-cream-bg mb-2">Kultur AI (Official)</h3>
+                    <p class="text-cream-muted dark:text-zinc-400 text-sm mb-6 flex-grow font-medium">Mengelola produksi konten dan strategi media sosial untuk akun resmi Kultur AI.</p>
+                    <div class="flex items-center gap-2 text-sm font-bold text-cream-dark dark:text-cream-bg group-hover:text-cream-accent dark:group-hover:text-cream-accent transition-colors">
+                        Tonton Konten <i class="ph-bold ph-arrow-right"></i>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="https://drive.google.com/drive/folders/1cXMeJnaa-OPbZ4ZTPIyKUhlm-8hGDEYN?usp=sharing" target="_blank" data-aos="flip-right" data-aos-duration="1000" data-aos-delay="500"
+                    class="group flex flex-col p-6 rounded-[2rem] bg-white dark:bg-zinc-900 border border-cream-border dark:border-white/10 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-cream-accent/30 dark:hover:border-cream-accent/50 transition-all duration-300">
+                    <div class="w-full aspect-video rounded-xl bg-cream-bg dark:bg-zinc-800 border border-cream-border dark:border-white/10 flex items-center justify-center mb-6 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('./images/drive.png');"></div>
+                        <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-500"></div>
+                        <i class="ph-fill ph-google-drive-logo text-6xl text-white group-hover:text-cream-accent group-hover:scale-110 transition-all duration-500 relative z-10"></i>
+                    </div>
+                    <span class="text-xs font-bold text-cream-accent tracking-widest uppercase mb-2">Google Drive</span>
+                    <h3 class="text-xl font-extrabold text-cream-dark dark:text-cream-bg mb-2">Project AI</h3>
+                    <p class="text-cream-muted dark:text-zinc-400 text-sm mb-6 flex-grow font-medium">Dokumentasi & arsitektur implementasi sistem berbasis AI tingkat lanjut.</p>
+                    <div class="flex items-center gap-2 text-sm font-bold text-cream-dark dark:text-cream-bg group-hover:text-cream-accent dark:group-hover:text-cream-accent transition-colors">
+                        Buka Drive <i class="ph-bold ph-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: false, offset: 50, easing: 'ease-out-cubic' });
+
+        // Page Loader & Transition Logic
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('page-loader');
+            if(loader) loader.classList.add('hidden-loader');
+        });
+
+        document.querySelectorAll('a[href$=".html"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if(this.target === '_blank') return;
+                e.preventDefault();
+                const target = this.href;
+                const loader = document.getElementById('page-loader');
+                if(loader) {
+                    loader.classList.remove('hidden-loader');
+                    setTimeout(() => { window.location.href = target; }, 400);
+                } else {
+                    window.location.href = target;
+                }
+            });
+        });
+
+        // Mobile Menu Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMobileMenu() {
+            const isMenuOpen = !mobileMenu.classList.contains('opacity-0');
+            if (isMenuOpen) {
+                mobileMenu.classList.add('opacity-0', 'invisible', '-translate-y-4');
+                mobileMenuIcon.classList.replace('ph-x', 'ph-list');
+            } else {
+                mobileMenu.classList.remove('opacity-0', 'invisible', '-translate-y-4');
+                mobileMenuIcon.classList.replace('ph-list', 'ph-x');
+            }
+        }
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            lightIcon.classList.remove('hidden');
+        } else {
+            darkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function () {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
